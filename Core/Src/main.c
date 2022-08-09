@@ -42,7 +42,7 @@
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-float frame_cnt = 0;
+uint32_t frame_cnt = 0;
 uint8_t loop_cnt = 0;
 /* USER CODE END PV */
 
@@ -332,16 +332,16 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (loop_cnt < 255) {
-		htim2.Instance->CCR1 = dropout[(int)frame_cnt] * 144144 / 3000;
-		htim2.Instance->CCR2 = dropout[(int)frame_cnt] * 144144 / 3000;
-		htim2.Instance->CCR3 = dropout[(int)frame_cnt] * 144144 / 3000;
-		htim2.Instance->CCR4 = dropout[(int)frame_cnt] * 144144 / 3000;
-		frame_cnt += 1.2;
+		htim2.Instance->CCR1 = dropout[frame_cnt] * 120000 / 2500;
+		htim2.Instance->CCR2 = dropout[frame_cnt] * 120000 / 2500;
+		htim2.Instance->CCR3 = dropout[frame_cnt] * 120000 / 2500;
+		htim2.Instance->CCR4 = dropout[frame_cnt] * 120000 / 2500;
+		frame_cnt++;
 	} else {
-		htim2.Instance->CCR1 = 900 * 144144 / 3000;
-		htim2.Instance->CCR2 = 900 * 144144 / 3000;
-		htim2.Instance->CCR3 = 900 * 144144 / 3000;
-		htim2.Instance->CCR4 = 900 * 144144 / 3000;
+		htim2.Instance->CCR1 = 900 * 120000 / 2500;
+		htim2.Instance->CCR2 = 900 * 120000 / 2500;
+		htim2.Instance->CCR3 = 900 * 120000 / 2500;
+		htim2.Instance->CCR4 = 900 * 120000 / 2500;
 	}
 	if (frame_cnt >= 37327) {
 		frame_cnt = 0;
