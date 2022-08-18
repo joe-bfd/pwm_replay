@@ -343,7 +343,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		htim2.Instance->CCR3 = 900 * 120000 / 2500;
 		htim2.Instance->CCR4 = 900 * 120000 / 2500;
 	}
-	if (frame_cnt >= 37327) {
+	if (frame_cnt >= sizeof(dropout)/2) {
 		frame_cnt = 0;
 		loop_cnt++;
 	}
